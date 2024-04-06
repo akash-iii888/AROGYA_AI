@@ -4,7 +4,7 @@ import google.generativeai as genai
 from PIL import Image
 import pandas as pd  # Import pandas for data formatting
 
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("key_1"))
 
 ## Function to load Google Gemini Pro Vision API and get response
 def get_gemini_response(input_prompt, image_data, input_text):
@@ -23,31 +23,27 @@ def input_image_setup(uploaded_file):
     else:
         raise FileNotFoundError("No file uploaded")
 
-## Initialize Streamlit app with enhanced styling
+## Initialize Streamlit app 
 st.set_page_config(page_title="AROGYA", page_icon="", layout="wide")  # Optional layout setting
 
 st.title("AROGYA")
 
-# Create sidebar for user input with color customization
+
 with st.sidebar:
     st.header("Input Options")
     input_text = st.text_input("Input Prompt:", key="input", placeholder="Describe your health goal...")
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
-# Display uploaded image with caption
+# Display uploaded image 
 image = None
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-# Button with improved styling
-# Display button with custom styling
 
 
-# Remove the class_ argument from st.button() function
 submit = st.button("Show facts", key="calorie_button")
 
-# Then, apply custom styling using st.markdown() with HTML and CSS
 st.markdown("""
     <style>
         .custom-button {
@@ -69,20 +65,21 @@ st.markdown("""
 input_prompt = """
 Analyze the food items in the image and provide the following information:
 
- You are an expert in nutritionist where you need to see the food items from the image
-               and calculate the total calories, also provide the details of every food items with calories intake
+ You are an expert in field of nutrition where you need to see the food items from the image
+               and calculate the total calories, protein, fats, carbohydrates, etc also provide the details of every food items with calories intake
                is below format
 
-               1. Item 1 - no of calories
-               2. Item 2 - no of calories
+               1. Item 1 - All the information
+               2. Item 2 - All the information
+               ----
                ----
                ----
 
 
-also other nutritional things about image and also provide information in paragrapgh if asked in input prommpt
+also other nutritional things about image and also provide information in paragrapgh if asked in input prommpt,
 
 You are the expert in this field so you have to give output according to the input prompt.
-answer should be in minimum 60 words
+answer should be accurate and readable.
 
 """
 
@@ -96,7 +93,7 @@ if submit:
         st.subheader("The Response is:")
         st.write("No food items were detected in the image.")
     else:
-        st.subheader("Calorie Count & Nutrition Information:")
+        st.subheader("Nutrition Information:")
 
         # Display the DataFrame with adjusted display settings for better visibility
         st.dataframe(response)
