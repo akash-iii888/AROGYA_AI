@@ -88,12 +88,12 @@ if submit:
     image_data = input_image_setup(uploaded_file)
     response = get_gemini_response(input_prompt, image_data, input_text)
 
-    # Display results in a visually appealing format using pandas DataFrame
+    # Display results 
     if response.empty:
         st.subheader("The Response is:")
         st.write("No food items were detected in the image.")
     else:
         st.subheader("Nutrition Information:")
 
-        # Display the DataFrame with adjusted display settings for better visibility
+        # Display the DataFrame 
         st.dataframe(response)
