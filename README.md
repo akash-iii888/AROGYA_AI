@@ -4,6 +4,6 @@ Made a application for analyzing health related facts using a image as input by 
 
 
 
-Create a env file for API key and store file in same folder as project folder
+
 
 
